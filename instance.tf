@@ -28,6 +28,10 @@ resource "aws_instance" "private_ec2" {
 
   security_groups = [aws_security_group.allow_tls.id]
 
+  user_data = <<-EOF
+    #!/bin/bash
+    echo "ec2-user:1234" | sudo chpasswd
+  EOF
 
   tags = {
     Name = "ec2"
